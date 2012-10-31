@@ -1,14 +1,4 @@
 var SkyScanner = {
-  showResults: function(){
-    $("#searchDiv").hide();
-    $("#resultsContainer").show();
-  },
-
-  showSearch: function(){
-    $("#resultsContainer").hide();
-    $("#searchDiv").show();
-  },
-
   getSearchParams: function(){
     return {
       firstDepartureDate: new Date($("#firstDepartureDate").val()),
@@ -41,8 +31,32 @@ var SkyScanner = {
     return datesList;
   },
 
+  sendRequest: function(dateRange){
+    SkyScanner.pendingRequests++;
+    $.get("http://www.skyscanner.net/flights-from/tlv/" +
+      Utils.toSkyScannerDate(dateRange.departureDate) + "/" + Utils.toSkyScannerDate(dateRange.returnDate) + "/blabla.html",
+      {}, SkyScanner.completeScrape)
+  },
+
+  completeScrape: function(data){
+    SkyScanner.pendingRequests --;
+    console.log("success!");
+  },
+
+  scrapeDates:function(datesList){
+    SkyScanner.pendingRequests = 0;
+    SkyScanner.results = {};
+
+    for(i in datesList){
+      dateRange = datesList[i];
+
+      SkyScanner.sendRequest(dateRange);
+    }
+  },
+
   scrape: function(){
     var datesList = SkyScanner.getDatesList();
+    SkyScanner.scrapeDates(datesList);
     SkyScanner.showResults();
   }
 }
