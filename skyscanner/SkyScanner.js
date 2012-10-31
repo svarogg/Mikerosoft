@@ -38,14 +38,19 @@ var SkyScanner = {
       {}, SkyScanner.completeScrape)
   },
 
+
+
   completeScrape: function(data){
+    results = results.concat(SkyScanner.parseData)
+
     SkyScanner.pendingRequests --;
-    console.log("success!");
+    if(pendingRequests == 0)
+      SkyScanner.showResults();
   },
 
   scrapeDates:function(datesList){
     SkyScanner.pendingRequests = 0;
-    SkyScanner.results = {};
+    SkyScanner.results = [];
 
     for(i in datesList){
       dateRange = datesList[i];
@@ -57,6 +62,6 @@ var SkyScanner = {
   scrape: function(){
     var datesList = SkyScanner.getDatesList();
     SkyScanner.scrapeDates(datesList);
-    SkyScanner.showResults();
+    UI.showResults();
   }
 }
