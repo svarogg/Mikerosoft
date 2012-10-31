@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mikerosoft FlightScraper++</title>
+    <script src="jquery-1.8.2.js" type="text/javascript"></script>
+    <script src="Lists.js" type="text/javascript"></script>
+    <script src="FlightScraper.js" type="text/javascript"></script>
+    <script src="UI.js" type="text/javascript"></script>
+    <script src="Utils.js" type="text/javascript"></script>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            FlightScraper.scrape();
+        });
+    </script>
+    
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h1>Mikerosoft FlightScraper++</h1>
+    
+    <div id="resultsDiv">
+        <h2>Scraping... <h3>
+    </div>
+</body>
+</html>

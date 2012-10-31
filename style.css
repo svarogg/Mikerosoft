@@ -1,0 +1,13 @@
+﻿#searchDiv {
+    float: left;
+    width: 15%;
+}
+
+#resultsDiv {
+    width: 85%;
+    float: left;
+}
+
+.number_range_filter {
+    width: 30px;
+}

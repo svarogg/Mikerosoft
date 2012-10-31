@@ -1,0 +1,2 @@
+Header set X-Robots-Tag "noindex, nofollow"
+Header set Access-Control-Allow-Origin *

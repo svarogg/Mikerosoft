@@ -1,0 +1,11 @@
+﻿#resultsContainer{
+  display: none;
+}
+
+#backToSearchContainer{
+  text-align: right;
+}
+
+.number_range_filter {
+    width: 30px;
+}
