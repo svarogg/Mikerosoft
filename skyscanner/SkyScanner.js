@@ -38,14 +38,43 @@ var SkyScanner = {
       {}, SkyScanner.completeScrape)
   },
 
+  findDataScriptTag: function(data){
+    data = data.substr(data.indexOf("SS.data.browse = "));
+    var SS = {data: {} };
+    return eval(data.substr(0, data.indexOf("</script>")));
+  },
 
+  parseData: function(data){
+    data = SkyScanner.findDataScriptTag(data);
+
+    datesPattern = new RegExp("/flights/tlv/.*?/(.*?)/(.*?)/.*\.html")
+
+    results = [];
+    for(i in data.results){
+      var dataItem = data.results[i];
+      if(dataItem.price == null)
+        continue;
+      var match = datesPattern.exec(dataItem.url)
+
+      results.push([
+        dataItem.placeName,                                                                 // destination
+        Utils.toReadableDate(Utils.parseSkyScannerDate(match[1])),                          // departure date
+        Utils.toReadableDate(Utils.parseSkyScannerDate(match[2])),                          // return date
+        dataItem.price,                                                                     // price
+        "<a href='http://www.skyscanner.net" + dataItem.url + "' target='_blank'>Click</a>" // url
+      ]);
+    }
+
+    return results;
+  },
 
   completeScrape: function(data){
-    results = results.concat(SkyScanner.parseData)
+    SkyScanner.results = SkyScanner.results.concat(SkyScanner.parseData(data))
+    console.log(SkyScanner.results)
 
     SkyScanner.pendingRequests --;
-    if(pendingRequests == 0)
-      SkyScanner.showResults();
+    if (SkyScanner.pendingRequests == 0)
+      UI.displayResults(SkyScanner.results);
   },
 
   scrapeDates:function(datesList){
