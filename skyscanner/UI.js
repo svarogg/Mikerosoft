@@ -9,6 +9,16 @@
     $("#searchDiv").show();
   },
 
+  initProgressBar: function(numberOfDates){
+    $("#progress").attr("max", numberOfDates).val(0);
+    UI.progressValue = 0;
+  },
+
+  incrementProgressBar: function(){
+    UI.progressValue++;
+    $("#progress").val(UI.progressValue);
+  },
+
   displayResults: function(results){
     UI.initDataTablesPlugins();
     $('#resultsDiv').html('<table cellpadding="0" cellspacing="0" border="0" class="" id="resultsTable"></tr></tfoot></table>');
@@ -20,8 +30,8 @@
         { "sTitle": "Destination" },
         { "sTitle": "Departure", sType: "date-uk" },
         { "sTitle": "Return", sType: "date-uk" },
-        // { "sTitle": "Deprature Weekday" },
-        // { "sTitle": "Return Weekday" },
+        { "sTitle": "Deprature Weekday" },
+        { "sTitle": "Return Weekday" },
         // { "sTitle": "Number of Days" },
         { "sTitle": "Cost (in $)" },
         { "sTitle": "Details" },
@@ -32,8 +42,8 @@
         { type: "text" },
         { type: "text" },
         { type: "text" },
-        // { type: "select", values: Lists.weekdays },
-        // { type: "select", values: Lists.weekdays },
+        { type: "select", values: Utils.weekdays },
+        { type: "select", values: Utils.weekdays },
         // { type: "number-range" },
         { type: "number-range" }
       ]

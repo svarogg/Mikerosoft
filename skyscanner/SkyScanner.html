@@ -17,7 +17,7 @@
 
     <script type="text/javascript">
         $(function(){
-            $("#backToSearchButton").click(UI.showSearch);
+            $("#backToSearchButton").click(function() {location.reload()});
             $("#scrapeButton").click(SkyScanner.scrape);
         });
     </script>
@@ -25,8 +25,8 @@
 <body>
     <h1>Mikerosoft SkyScanner++</h1>
     <div id="searchDiv">
-        First possible departure: <input type="date" id="firstDepartureDate" value="2012-11-10" ><br/>
-        Last possible return: <input type="date" id="lastReturnDate" value="2012-11-15" ><br/>
+        First possible departure: <input type="date" id="firstDepartureDate" value="2012-11-21" ><br/>
+        Last possible return: <input type="date" id="lastReturnDate" value="2012-11-26" ><br/>
         Minimum Length: <input type="number" id="minLength" value="3"/><br/>
         Maximum Length: <input type="number" id="maxLength" value="5"/><br/>
         <input type="checkbox" id="mustContainWeekend" /> Must contain weekend (Not implemented yet!!!)<br/>
@@ -36,7 +36,8 @@
     <div id="resultsContainer">
         <div id="backToSearchContainer"><button id="backToSearchButton" >Back To Search</button></div>
         <div id="resultsDiv">
-            <h2>Scraping... <h3>
+            <h2>Scraping... </h2>
+            <progress id="progress" />
         </div>
     </div>
 </body>
