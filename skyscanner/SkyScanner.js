@@ -19,6 +19,8 @@ var SkyScanner = {
       do {
         departureDate = Utils.addDays(departureDate, 1);
         returnDate = Utils.addDays(departureDate, length);
+        if(searchParams.onlyWeekend && !Utils.containsWeekend(departureDate, returnDate))
+          continue;
 
         datesList.push({
           departureDate: departureDate,
