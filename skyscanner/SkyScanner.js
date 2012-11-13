@@ -67,6 +67,7 @@ var SkyScanner = {
         Utils.toReadableDate(returnDate),                                                   // return date
         Utils.weekdays[departureDate.getDay()],                                             // departure weekday
         Utils.weekdays[returnDate.getDay()],                                                // return weekday
+        Utils.dateDiffByDay(departureDate, returnDate),                                     // number of days
         dataItem.price,                                                                     // price
         "<a href='http://www.skyscanner.net" + dataItem.url + "' target='_blank'>Click</a>" // url
       ]);

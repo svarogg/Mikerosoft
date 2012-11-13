@@ -32,7 +32,7 @@
         { "sTitle": "Return", sType: "date-uk" },
         { "sTitle": "Deprature Weekday" },
         { "sTitle": "Return Weekday" },
-        // { "sTitle": "Number of Days" },
+        { "sTitle": "Number of Days" },
         { "sTitle": "Cost (in $)" },
         { "sTitle": "Details" },
       ]
@@ -44,7 +44,7 @@
         { type: "text" },
         { type: "select", values: Utils.weekdays },
         { type: "select", values: Utils.weekdays },
-        // { type: "number-range" },
+        { type: "number-range" },
         { type: "number-range" }
       ]
     });
