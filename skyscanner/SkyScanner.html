@@ -17,7 +17,7 @@
 
     <script type="text/javascript">
         $(function(){
-            $("#backToSearchButton").click(UI.showSearch);
+            $("#backToSearchButton").click(function() {location.reload()});
             $("#scrapeButton").click(SkyScanner.scrape);
         });
     </script>
@@ -25,18 +25,27 @@
 <body>
     <h1>Mikerosoft SkyScanner++</h1>
     <div id="searchDiv">
+<<<<<<< HEAD
         First possible departure: <input type="date" id="firstDepartureDate" value="2013-05-10" ><br/>
         Last possible return: <input type="date" id="lastReturnDate" value="2013-05-20" ><br/>
         Minimum Length: <input type="number" id="minLength" value="5"/><br/>
         Maximum Length: <input type="number" id="maxLength" value="8"/><br/>
         <input type="checkbox" id="mustContainWeekend" /> Must contain weekend (Not implemented yet!!!)<br/>
+=======
+        First possible departure: <input type="date" id="firstDepartureDate" value="2012-11-21" ><br/>
+        Last possible return: <input type="date" id="lastReturnDate" value="2012-12-03" ><br/>
+        Minimum Length: <input type="number" id="minLength" value="3"/><br/>
+        Maximum Length: <input type="number" id="maxLength" value="5"/><br/>
+        <input type="checkbox" id="mustContainWeekend" checked="checked" /> Must contain weekend<br/>
+>>>>>>> 9c58cfac6c5b442cdf3c7ac8357f4855cede33b8
         <button id="scrapeButton" >Scrape</button>
     </div>
 
     <div id="resultsContainer">
         <div id="backToSearchContainer"><button id="backToSearchButton" >Back To Search</button></div>
         <div id="resultsDiv">
-            <h2>Scraping... <h3>
+            <h2>Scraping... </h2>
+            <progress id="progress" />
         </div>
     </div>
 </body>

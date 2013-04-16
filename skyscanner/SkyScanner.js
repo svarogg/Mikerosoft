@@ -19,6 +19,8 @@ var SkyScanner = {
       do {
         departureDate = Utils.addDays(departureDate, 1);
         returnDate = Utils.addDays(departureDate, length);
+        if(searchParams.onlyWeekend && !Utils.containsWeekend(departureDate, returnDate))
+          continue;
 
         datesList.push({
           departureDate: departureDate,
@@ -54,12 +56,18 @@ var SkyScanner = {
       var dataItem = data.results[i];
       if(dataItem.price == null)
         continue;
+
       var match = datesPattern.exec(dataItem.url)
+      var departureDate = Utils.parseSkyScannerDate(match[1])
+      var returnDate = Utils.parseSkyScannerDate(match[2])
 
       results.push([
         dataItem.placeName,                                                                 // destination
-        Utils.toReadableDate(Utils.parseSkyScannerDate(match[1])),                          // departure date
-        Utils.toReadableDate(Utils.parseSkyScannerDate(match[2])),                          // return date
+        Utils.toReadableDate(departureDate),                                                // departure date
+        Utils.toReadableDate(returnDate),                                                   // return date
+        Utils.weekdays[departureDate.getDay()],                                             // departure weekday
+        Utils.weekdays[returnDate.getDay()],                                                // return weekday
+        Utils.dateDiffByDay(departureDate, returnDate),                                     // number of days
         dataItem.price,                                                                     // price
         "<a href='http://www.skyscanner.net" + dataItem.url + "' target='_blank'>Click</a>" // url
       ]);
@@ -73,6 +81,7 @@ var SkyScanner = {
     console.log(SkyScanner.results)
 
     SkyScanner.pendingRequests --;
+    UI.incrementProgressBar();
     if (SkyScanner.pendingRequests == 0)
       UI.displayResults(SkyScanner.results);
   },
@@ -89,8 +98,9 @@ var SkyScanner = {
   },
 
   scrape: function(){
-    var datesList = SkyScanner.getDatesList();
-    SkyScanner.scrapeDates(datesList);
     UI.showResults();
+    var datesList = SkyScanner.getDatesList();
+    UI.initProgressBar(datesList.length);
+    SkyScanner.scrapeDates(datesList);
   }
 }
